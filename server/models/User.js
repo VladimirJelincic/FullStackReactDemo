@@ -16,11 +16,14 @@ const UserSchema = new Schema({
     required: 'Please enter an email address'
   },
   password: String,
-  likes: []
+  likedBy: [],
+  likes: Number
 });
 
 UserSchema.pre('save', function(next) {
   const user = this;
+  user.likes = user.likedBy.length;
+
   bcrypt.genSalt(10, (err, salt) => {
     if (err) {
       return next(err);

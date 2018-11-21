@@ -1,4 +1,5 @@
 const config = {
-  secret: 'ThisFileObviouslyShouldntBeInGit'
+  secret: 'ThisFileObviouslyShouldntBeInGit',
+  db: 'fsrdemo_vjelincic'
 };
 module.exports = config;
