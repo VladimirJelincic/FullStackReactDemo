@@ -1,3 +1,4 @@
 node_modules
 .vscode
 instructions.md
+.DS_Store
