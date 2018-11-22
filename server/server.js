@@ -6,7 +6,7 @@ const app = express();
 const router = require('./routes/router');
 const { db } = require('./config');
 mongoose.connect(
-  `mongodb://localhost/${db}`,
+  `mongodb://localhost/${db}${process.env.NODE_ENV === 'test' ? '_test' : ''}`,
   { useNewUrlParser: true }
 );
 mongoose.set('useCreateIndex', true);
@@ -16,3 +16,4 @@ const port = process.env.PORT || 3001;
 const server = http.createServer(app);
 server.listen(port);
 console.log(`Server up and listening on port ${port}`);
+module.exports = server;

@@ -1,12 +1,12 @@
 {
-  "name": "poviol",
+  "name": "full-stack-react-demo",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "mon": "nodemon server.js"
+    "monitor": "nodemon server.js",
+    "test": "export NODE_ENV=test PORT=3001 && mocha -u tdd --timeout 999999 --colors --harmony ./test/"
   },
   "author": "vladimir.jelincic@gmail.com",
   "license": "ISC",
@@ -21,6 +21,9 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.6"
   }
 }
