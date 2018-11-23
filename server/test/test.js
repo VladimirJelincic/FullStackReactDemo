@@ -195,6 +195,18 @@ describe('Tests', () => {
         });
     });
   });
+  describe('/POST user/:id/unlike', () => {
+    it(`it should try to unlike a user again and recieve error`, done => {
+      chai
+        .request(server)
+        .post(`/user/${listOfUsers[2]._id}/unlike`)
+        .set('Authorization', token)
+        .end((err, res) => {
+          res.should.have.status(422);
+          done();
+        });
+    });
+  });
   describe('/GET user/:id/', () => {
     it(`it should try to get info for the user and check that it has 0 likes`, done => {
       chai

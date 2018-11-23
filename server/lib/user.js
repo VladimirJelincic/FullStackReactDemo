@@ -31,7 +31,7 @@ const getUser = async (req, res) => {
 const likeUser = async (req, res) => {
   const {
     params: { id },
-    user: { _id }
+    user: { _id, email }
   } = req;
   const sourceUserId = _id.toString();
   if (id === sourceUserId) {
@@ -39,10 +39,11 @@ const likeUser = async (req, res) => {
   } else {
     const user = await User.findById(id);
     if (user) {
-      if (user.likedBy.includes(sourceUserId)) {
+      const likedAlready = user.likedBy.find(e => e.id === sourceUserId);
+      if (likedAlready) {
         res.status(422).json({ error: 'User has already been liked' });
       } else {
-        user.likedBy.push(sourceUserId);
+        user.likedBy.push({ id: sourceUserId, email });
         await user.save();
         res.status(200).json({ 'msg:': 'User has been liked' });
       }
@@ -62,11 +63,12 @@ const unlikeUser = async (req, res) => {
   } else {
     const user = await User.findById(id);
     if (user) {
-      const index = user.likedBy.indexOf(sourceUserId);
-      if (index === -1) {
-        res.status(422).json({ error: 'User has already been unliked' });
+      const likedAlready = user.likedBy.find(e => e.id === sourceUserId);
+      if (!likedAlready) {
+        res.status(422).json({ error: 'User has not been liked before' });
       } else {
-        user.likedBy.splice(index, 1);
+        const newLikes = user.likedBy.filter(e => e.id !== sourceUserId);
+        user.likedBy = newLikes;
         await user.save();
         res.status(200).json({ 'msg:': 'User has been unliked' });
       }
