@@ -8,9 +8,14 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
 import App from './App';
-import Main from './components/Main';
-
 import reducers from './reducers/reducerIndex';
+
+import Main from './components/Main';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import Users from './components/Users';
+
 const store = createStore(
   reducers,
   {
@@ -24,10 +29,10 @@ ReactDOM.render(
     <BrowserRouter>
       <App>
         <Route path="/" exact component={Main} />
-        {/* <Route path="/signup" component={Signup} />
-        <Route path="/signin" component={Signin} />
-        <Route path="/users" component={Feature} />
-        <Route path="/signout" component={Signout} /> */}
+        <Route path="/users" component={Users} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
       </App>
     </BrowserRouter>
   </Provider>,

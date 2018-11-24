@@ -78,7 +78,7 @@ const unlikeUser = async (req, res) => {
   }
 };
 const getUsers = async (req, res) => {
-  const users = await User.find({}, ['email', 'likes'], { sort: { likes: -1 } });
+  const users = await User.find({}, ['email', 'likes', 'likedBy'], { sort: { likes: -1 } });
   res.status(200).json(users);
 };
 module.exports = { getMe, getUser, likeUser, unlikeUser, getUsers };

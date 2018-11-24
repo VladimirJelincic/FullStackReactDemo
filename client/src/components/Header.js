@@ -5,14 +5,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 import './header.css';
 
 class Header extends Component {
-  componentWillMount = () => {
-    fetch('/most-liked')
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-      });
-  };
-
   renderLinks() {
     const links = [
       <LinkContainer key="navitem_1" to="/users" activeClassName="">
@@ -69,8 +61,8 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    // authenticated: state.auth.authenticated,
-    // user: state.auth.user
+    authenticated: state.auth.authenticated,
+    user: state.auth.user
   };
 }
 export default connect(mapStateToProps)(Header);
