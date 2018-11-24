@@ -8,7 +8,7 @@ import { renderField, validateEmail } from './util';
 class Login extends Component {
   onSubmit = formProps => {
     this.props.login(formProps, () => {
-      this.props.getMe(() => this.props.history.push('/'));
+      this.props.history.push('/');
     });
   };
 

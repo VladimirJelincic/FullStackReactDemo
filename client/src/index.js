@@ -9,12 +9,13 @@ import reduxThunk from 'redux-thunk';
 
 import App from './App';
 import reducers from './reducers/reducerIndex';
-
+import requireAuth from './requireAuth';
 import Main from './components/Main';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Users from './components/Users';
+import User from './components/User';
 
 const store = createStore(
   reducers,
@@ -30,6 +31,7 @@ ReactDOM.render(
       <App>
         <Route path="/" exact component={Main} />
         <Route path="/users" component={Users} />
+        <Route path="/user/:id" component={requireAuth(User)} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />

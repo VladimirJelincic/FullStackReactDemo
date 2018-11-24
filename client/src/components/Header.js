@@ -11,7 +11,7 @@ class Header extends Component {
         <NavItem>Users</NavItem>
       </LinkContainer>
     ];
-    if (this.props.authenticated && this.props.user) {
+    if (this.props.authenticated) {
       links.push(
         ...[
           <LinkContainer key="navitem_2" to="/me" activeClassName="">

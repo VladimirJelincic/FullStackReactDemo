@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../actions/userActions';
 
 class Users extends Component {
   componentDidMount = () => {
-    this.props.getUsers();
+    if (this.props.authorized) {
+      this.props.getMe(() => {
+        this.props.getUsers();
+      });
+    } else {
+      this.props.getUsers();
+    }
   };
 
   renderLike = (user, currentUser) => {
-    if (!currentUser || currentUser._id === user._id) {
+    if (!currentUser || currentUser._id === user._id || !this.props.authorized) {
       return (
         <button className="btn btn-default btn-sm" disabled>
           Like&nbsp; <i className="glyphicon glyphicon-thumbs-up" />
@@ -39,16 +46,17 @@ class Users extends Component {
   unLikeUser = (id, user) => {
     if (user) {
       this.props.unLikeUser(id, user);
-    } 
+    }
   };
 
   renderUsers() {
     const { users } = this.props;
+
     return users.map(e => {
       return (
         <li className="list-group-item" key={e._id}>
           <span className="text text-info" style={{ marginRight: '20px' }}>
-            {e.email}
+            <Link to={`/user/${e._id}`}> {e.email}</Link>
           </span>
           {this.renderLike(e, this.props.user)}
           <span className="badge">Likes {e.likes}</span>
@@ -57,17 +65,21 @@ class Users extends Component {
     });
   }
   render() {
-    return (
-      <div>
-        <h4>Users</h4>
-        <ul className="list-group">{this.renderUsers()}</ul>
-      </div>
-    );
+    if (this.props.users) {
+      return (
+        <div>
+          <h4>Users</h4>
+          <ul className="list-group">{this.renderUsers()}</ul>
+        </div>
+      );
+    } else {
+      return <div>Loading...</div>;
+    }
   }
 }
 
 const mapStateToProps = state => {
-  return { authorized: state.auth.authenticated, users: state.users.usersList, user: state.auth.user };
+  return { authorized: state.auth.authenticated, users: state.users.usersList, user: state.users.user };
 };
 
 export default connect(

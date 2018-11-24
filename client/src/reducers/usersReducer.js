@@ -1,4 +1,4 @@
-import { USERS_GET, USERS_ERROR, USER_LIKE, USER_UNLIKE } from './../actions/actionTypes';
+import { USERS_GET, USERS_ERROR, USER_LIKE, USER_UNLIKE, USER_GET_ME, USER_GET } from './../actions/actionTypes';
 
 const INITIAL_STATE = {
   usersList: [],
@@ -11,6 +11,10 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USERS_GET:
       return { ...state, usersList: action.payload, errorMessage: '' };
+    case USER_GET:
+      return { ...state, showUser: action.payload, errorMessage: '' };
+    case USER_GET_ME:
+      return { ...state, user: action.payload, errorMessage: '' };
     case USERS_ERROR:
       return { ...state, errorMessage: action.payload };
     case USER_LIKE:

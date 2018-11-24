@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTH_USER, AUTH_ERROR, AUTH_GET_USER } from './actionTypes';
+import { AUTH_USER, AUTH_ERROR } from './actionTypes';
 
 export const signup = (user, callback) => async dispatch => {
   try {
@@ -7,10 +7,12 @@ export const signup = (user, callback) => async dispatch => {
 
     dispatch({ type: AUTH_USER, payload: response.data.token });
     localStorage.setItem('token', response.data.token);
-    callback();
-  } catch (e) {
-    console.log(e);
-    dispatch({ type: AUTH_ERROR, payload: e.response.data.error });
+    if (callback) {
+      callback();
+    }
+  } catch (err) {
+    console.log(err);
+    dispatch({ type: AUTH_ERROR, payload: err.response.data.error });
   }
 };
 
@@ -20,25 +22,10 @@ export const login = (user, callback) => async dispatch => {
 
     dispatch({ type: AUTH_USER, payload: response.data.token });
     localStorage.setItem('token', response.data.token);
+
     callback();
-  } catch (e) {
+  } catch (err) {
     dispatch({ type: AUTH_ERROR, payload: 'User not found' });
-  }
-};
-
-export const getMe = callback => async dispatch => {
-  const token = localStorage.getItem('token');
-  try {
-    const response = await axios.get('/me', {
-      headers: { Authorization: token }
-    });
-
-    if (callback) {
-      callback();
-    }
-    dispatch({ type: AUTH_GET_USER, payload: response.data });
-  } catch (e) {
-    dispatch({ type: AUTH_ERROR, payload: 'Error retrieving profile' });
   }
 };
 
@@ -62,7 +49,7 @@ export const changePassword = (user, callback) => async dispatch => {
     dispatch({ type: AUTH_USER, payload: response.data.token });
     localStorage.setItem('token', response.data.token);
     callback();
-  } catch (e) {
-    dispatch({ type: AUTH_ERROR, payload: e });
+  } catch (err) {
+    dispatch({ type: AUTH_ERROR, payload: err });
   }
 };
