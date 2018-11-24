@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTH_USER, AUTH_ERROR } from './actionTypes';
+import { AUTH_USER, AUTH_ERROR, AUTH_CHANGE } from './actionTypes';
 
 export const signup = (user, callback) => async dispatch => {
   try {
@@ -44,11 +44,14 @@ export const clearErrorMessage = () => {
 };
 export const changePassword = (user, callback) => async dispatch => {
   try {
-    const response = await axios.post('/me/update-password', user);
+    const response = await axios.post('/me/update-password', user, {
+      headers: { Authorization: localStorage.getItem('token') }
+    });
 
-    dispatch({ type: AUTH_USER, payload: response.data.token });
-    localStorage.setItem('token', response.data.token);
-    callback();
+    dispatch({ type: AUTH_CHANGE, payload: response.data.msg });
+    if (callback) {
+      callback();
+    }
   } catch (err) {
     dispatch({ type: AUTH_ERROR, payload: err });
   }

@@ -69,6 +69,7 @@ class Users extends Component {
       return (
         <div>
           <h4>Users</h4>
+          {!this.props.user && <p>Login to access features</p>}
           <ul className="list-group">{this.renderUsers()}</ul>
         </div>
       );

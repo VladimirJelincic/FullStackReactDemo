@@ -16,6 +16,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Users from './components/Users';
 import User from './components/User';
+import Profile from './components/Profile';
 
 const store = createStore(
   reducers,
@@ -32,6 +33,7 @@ ReactDOM.render(
         <Route path="/" exact component={Main} />
         <Route path="/users" component={Users} />
         <Route path="/user/:id" component={requireAuth(User)} />
+        <Route path="/me" component={requireAuth(Profile)} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />

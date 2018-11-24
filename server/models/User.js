@@ -11,7 +11,7 @@ const UserSchema = new Schema({
   email: {
     type: String,
     unique: true,
-    lowercase: true,  
+    lowercase: true,
     validate: [validateEmail, 'Please fill a valid email address'],
     required: 'Please enter an email address'
   },
@@ -23,6 +23,10 @@ const UserSchema = new Schema({
 UserSchema.pre('save', function(next) {
   const user = this;
   user.likes = user.likedBy.length;
+
+  if (!user.isModified('password')) {
+    return next();
+  }
 
   bcrypt.genSalt(10, (err, salt) => {
     if (err) {
