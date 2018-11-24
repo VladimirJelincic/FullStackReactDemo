@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { USERS_GET, USERS_ERROR, USER_LIKE } from './actionTypes';
+import { USERS_GET, USERS_ERROR, USER_LIKE, USER_UNLIKE } from './actionTypes';
 
 export const getUsers = () => async dispatch => {
   try {
@@ -30,7 +30,7 @@ export const unLikeUser = (id, user) => async dispatch => {
       headers: { Authorization: token }
     });
 
-    dispatch({ type: USER_LIKE, payload: { user, id, response } });
+    dispatch({ type: USER_UNLIKE, payload: { user, id, response } });
   } catch (e) {
     dispatch({ type: USERS_ERROR, payload: 'And error occured' });
   }

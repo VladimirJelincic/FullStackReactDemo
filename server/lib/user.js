@@ -39,11 +39,11 @@ const likeUser = async (req, res) => {
   } else {
     const user = await User.findById(id);
     if (user) {
-      const likedAlready = user.likedBy.find(e => e.id === sourceUserId);
+      const likedAlready = user.likedBy.find(e => e._id === sourceUserId);
       if (likedAlready) {
         res.status(422).json({ error: 'User has already been liked' });
       } else {
-        user.likedBy.push({ id: sourceUserId, email });
+        user.likedBy.push({ _id: sourceUserId, email });
         await user.save();
         res.status(200).json({ 'msg:': 'User has been liked' });
       }
@@ -63,11 +63,11 @@ const unlikeUser = async (req, res) => {
   } else {
     const user = await User.findById(id);
     if (user) {
-      const likedAlready = user.likedBy.find(e => e.id === sourceUserId);
+      const likedAlready = user.likedBy.find(e => e._id === sourceUserId);
       if (!likedAlready) {
         res.status(422).json({ error: 'User has not been liked before' });
       } else {
-        const newLikes = user.likedBy.filter(e => e.id !== sourceUserId);
+        const newLikes = user.likedBy.filter(e => e._id !== sourceUserId);
         user.likedBy = newLikes;
         await user.save();
         res.status(200).json({ 'msg:': 'User has been unliked' });

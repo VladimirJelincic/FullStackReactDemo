@@ -15,7 +15,7 @@ class Users extends Component {
         </button>
       );
     } else {
-      const isLiked = user.likedBy && user.likedBy.find(e => e.id === currentUser._id);
+      const isLiked = user.likedBy.find(e => e._id === currentUser._id);
       if (isLiked) {
         return (
           <button className="btn btn-info btn-sm" onClick={() => this.unLikeUser(user._id, currentUser)}>
@@ -39,7 +39,7 @@ class Users extends Component {
   unLikeUser = (id, user) => {
     if (user) {
       this.props.unLikeUser(id, user);
-    }
+    } 
   };
 
   renderUsers() {
