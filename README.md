@@ -2,7 +2,8 @@
 
 ## Server
 
-The server uses Express, Mongo and Mongoose. In order to run, a local instance of MongoDB must be running.
+The server uses Express, Mongo and Mongoose. 
+In order to run, a local instance of MongoDB must be running.
 
 Starts with:
 
