@@ -2,7 +2,7 @@
 
 ## Server
 
-Uses Express, Mongo and Mongoose. In order to run, a local instance of MongoDB must be running.
+The server uses Express, Mongo and Mongoose. In order to run, a local instance of MongoDB must be running.
 
 Starts with:
 
@@ -31,7 +31,8 @@ npm run start
 
 ## Client
 
-Use Create-React-App, Redux, Redux-Thunk and Bootstrap CSS
+The client uses Create-React-App with Redux
+
 Starts with:
 
 ```

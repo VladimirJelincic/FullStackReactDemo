@@ -16,21 +16,24 @@ class Login extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form className="form-signin" onSubmit={handleSubmit(this.onSubmit)}>
-        <fieldset>
-          <label>Email</label>
-          <Field name="email" type="text" component={renderField} autoComplete="none" />
-        </fieldset>
-        <fieldset>
-          <label>Password</label>
-          <Field name="password" type="password" component={renderField} autoComplete="none" />
-        </fieldset>
-        <br />
-        <button className="btn btn-primary">Login</button>
-        <div>
-          <p className="text-danger">{this.props.errorMessage}</p>
-        </div>
-      </form>
+      <div>
+        <h4>Login</h4>
+        <form className="form-signin" onSubmit={handleSubmit(this.onSubmit)} id="loginForm">
+          <fieldset>
+            <label>Email</label>
+            <Field name="email" type="text" component={renderField} autoComplete="none" />
+          </fieldset>
+          <fieldset>
+            <label>Password</label>
+            <Field name="password" id="password" type="password" component={renderField} autoComplete="none" />
+          </fieldset>
+          <br />
+          <button className="btn btn-primary">Login</button>
+          <div>
+            <p className="text-danger">{this.props.errorMessage}</p>
+          </div>
+        </form>
+      </div>
     );
   }
 }

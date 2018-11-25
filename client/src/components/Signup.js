@@ -20,25 +20,28 @@ class Signup extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form className="form-signin" onSubmit={handleSubmit(this.onSubmit)}>
-        <fieldset>
-          <label>Email</label>
-          <Field name="email" type="text" component={renderField} autoComplete="none" />
-        </fieldset>
-        <fieldset>
-          <label>Password</label>
-          <Field name="password" type="password" component={renderField} autoComplete="none" />
-        </fieldset>
-        <fieldset className="field-set">
-          <label>Confirm Password</label>
-          <Field name="password2" type="password" component={renderField} autoComplete="none" />
-        </fieldset>
-        <br />
-        <button className="btn btn-primary">Sign Up!</button>
-        <div>
-          <p className="text-danger">{this.props.errorMessage}</p>
-        </div>
-      </form>
+      <div>
+        <h4>Signup</h4>
+        <form className="form-signin" onSubmit={handleSubmit(this.onSubmit)}>
+          <fieldset>
+            <label>Email</label>
+            <Field name="email" type="text" component={renderField} autoComplete="none" />
+          </fieldset>
+          <fieldset>
+            <label>Password</label>
+            <Field name="password" type="password" component={renderField} autoComplete="none" />
+          </fieldset>
+          <fieldset className="field-set">
+            <label>Confirm Password</label>
+            <Field name="password2" type="password" component={renderField} autoComplete="none" />
+          </fieldset>
+          <br />
+          <button className="btn btn-primary">Sign Up!</button>
+          <div>
+            <p className="text-danger">{this.props.errorMessage}</p>
+          </div>
+        </form>
+      </div>
     );
   }
 }

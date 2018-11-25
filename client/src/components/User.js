@@ -14,14 +14,17 @@ class User extends Component {
 
     if (user) {
       return (
-        <div className="form-signin">
-          <h2>{user.email}</h2>
-          <p className="badge">Likes {user.likes}</p>
-          {showLikes(user)}
-          <br />
-          <Link to={`/users`}>
-            <i className="glyphicon glyphicon-backward" />
-          </Link>
+        <div>
+          <h4>Users</h4>
+          <div className="form-signin">
+            <h2>{user.email}</h2>
+            <p className="badge">Likes {user.likes}</p>
+            {showLikes(user)}
+            <br />
+            <Link to={`/users`}>
+              <i className="glyphicon glyphicon-backward" />
+            </Link>
+          </div>
         </div>
       );
     } else {
